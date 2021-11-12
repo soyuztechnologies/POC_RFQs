@@ -1,0 +1,60 @@
+<core:FragmentDefinition
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+>
+    <Dialog contentWidth="60%" contentHeight="70%" >
+        <content>
+            <ObjectHeader
+                title="{PurchasingDocumentItemText}"
+                intro="{RequestForQuotationItem}"
+                number="{ScheduleLineOrderQuantity}"
+                numberUnit="{OrderQuantityUnit}"
+                responsive="true"
+                 >
+                <ObjectAttribute title="Schedule Delivery Date" text="{path: 'ScheduleLineDeliveryDate', formatter: '.formatter.getFormattedDate'}" />
+                <ObjectAttribute title="Schedule Order Quantity" text="{ScheduleLineOrderQuantity}" />
+            </ObjectHeader>
+            <Table mode="None" >
+                <columns>
+                    <Column >
+                        <Label text="Material" wrapping="true" ></Label>
+                    </Column>
+                    <Column >
+                        <Label text="Manufacturer" wrapping="true"></Label>
+                    </Column>
+                    <Column width="8%" >
+                        <Label text="Plant" wrapping="true"></Label>
+                    </Column>
+                    <Column >
+                        <Label text="Manual Delivery Address ID" wrapping="true"></Label>
+                    </Column>
+                    <Column >
+                        <Label text="Reference Delivery Address ID" wrapping="true" ></Label>
+                    </Column>
+                    <Column >
+                        <Label text="Location 1" wrapping="true"></Label>
+                    </Column>
+                    <Column >
+                        <Label text="Location 2" wrapping="true"></Label>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem >
+                        <cells>
+                            <Text text="{Material}" ></Text>
+                            <Text text="{Manufacturer}" ></Text>
+                            <Text text="{Plant}"></Text>
+                            <Text text="{ManualDeliveryAddressID}" ></Text>
+                            <Text text="{ReferenceDeliveryAddressID}" ></Text>
+                            <Text text="{IncotermsLocation1}" ></Text>
+                            <Text text="{IncotermsLocation2}" ></Text>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+        <endButton>
+            <Button text="Close" press="onItemDialogClose"></Button>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>  

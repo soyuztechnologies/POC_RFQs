@@ -1,0 +1,180 @@
+{
+    "_version": "1.32.0",
+    "sap.app": {
+        "id": "soyz.dev.poc.pocproject",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "1.0.0"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "ach": "ach",
+        "dataSources": {
+            "mainService": {
+                "uri": "/s4hanacloud/sap/opu/odata/sap/API_RFQ_PROCESS_SRV",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "localUri": "localService/metadata.xml"
+                }
+            },
+            "businessPartnerSevice": {
+                "uri": "/s4hanacloud/sap/opu/odata/sap/API_BUSINESS_PARTNER",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "sap-icon://task",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": false,
+        "rootView": {
+            "viewName": "soyz.dev.poc.pocproject.view.App",
+            "type": "XML",
+            "async": true,
+            "id": "App"
+        },
+        "dependencies": {
+            "minUI5Version": "1.95.0",
+            "libs": {
+                "sap.ui.core": {},
+                "sap.m": {},
+                "sap.ui.layout": {},
+                "sap.f": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "soyz.dev.poc.pocproject.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true
+            },
+            "local": {
+                "type": "sap.ui.model.json.JSONModel",
+                "preload": true
+            },
+            "BusinessPartner": {
+                "dataSource": "businessPartnerSevice",
+                "preload": true
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "async": true,
+                "viewPath": "soyz.dev.poc.pocproject.view",
+                "controlAggregation": "beginColumnPages",
+                "controlId": "layout"
+            },
+            "routes": [
+                {
+                    "pattern": "",
+                    "name": "loginPage",
+                    "target": [
+                        "AppLogin"
+                    ]
+                },
+                {
+                    "pattern": "Entry/{bpID}",
+                    "name": "entryTilePage",
+                    "target": [
+                        "EntryTileScreen"
+                    ]
+                },
+                {
+                    "pattern": "reqList/{bpID}",
+                    "name": "reqListPage",
+                    "target": [
+                        "RequestListScreen"
+                    ]
+                },
+                {
+                    "pattern": "detail/{bpID}/{reqQuotID}",
+                    "name": "detailScreen",
+                    "target": [
+                        "DetailScreen",
+                        "ItemDetailScreen"
+                    ]
+                }
+            ],
+            "targets": {
+                "AppLogin": {
+                    "viewType": "XML",
+                    "viewName": "Login",
+                    "clearControlAggregation": true,
+                    "viewLevel": 1,
+                    "viewId": "idLogin"
+                },
+                "EntryTileScreen": {
+                    "viewType": "XML",
+                    "viewName": "EntryTile",
+                    "clearControlAggregation": true,
+                    "viewLevel": 1,
+                    "viewId": "idEntryTile"
+                },
+                "RequestListScreen": {
+                    "viewType": "XML",
+                    "viewName": "RequestList",
+                    "clearControlAggregation": true,
+                    "viewLevel": 1,
+                    "viewId": "idReqList"
+                },
+                "DetailScreen": {
+                    "viewType": "XML",
+                    "viewName": "Detail",
+                    "clearControlAggregation": true,
+                    "viewLevel": 1,
+                    "viewId": "idDetailScreen"
+                },
+                "ItemDetailScreen": {
+                    "viewType": "XML",
+                    "viewName": "ItemDetail",
+                    "clearControlAggregation": true,
+                    "controlAggregation": "midColumnPages",
+                    "viewLevel": 1,
+                    "viewId": "idItemDetailScreen"
+                }
+            }
+        }
+    },
+    "sap.cloud": {
+        "public": true,
+        "service": "soyz-dev-poc-pocproject"
+    }
+}

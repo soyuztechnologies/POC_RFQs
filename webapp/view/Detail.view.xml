@@ -1,0 +1,50 @@
+<mvc:View xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:layout="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" controllerName="soyz.dev.poc.pocproject.controller.Detail" height="100%">
+	<Page
+		id="idPage"
+        title="Request Header"
+        showNavButton="true"
+        navButtonPress="onNavToReqList"
+		 >
+		<!-- this CSS class add a standard spacing to all the page content -->
+        <headerContent>
+            <!-- <Button icon="sap-icon://nav-back"  press='onNavToReqList' type="Ghost" /> -->
+            <Button icon="sap-icon://log" text="" tooltip="Logout" press='onLogout' type="Emphasized" />
+        </headerContent>
+		<content>
+			<ObjectHeader
+                title="{= ${RequestForQuotationName} === '' ? 'NaN' : ${RequestForQuotationName}}"
+                number="{RequestForQuotation}"
+                backgroundDesign="Solid"
+                numberUnit="Target Amount: {TargetAmount} {DocumentCurrency}"
+                responsive="false" >
+				<attributes>
+					<ObjectAttribute title="Company Code" text="{CompanyCode}" />
+					<ObjectAttribute title="Publishing Date" text="{path: 'RFQPublishingDate', formatter:'.formatter.getFormattedDate'}" />
+				</attributes>
+				<statuses>
+					<ObjectStatus title="Lifecycle Status" text="{RFQLifecycleStatus}" />
+				</statuses>
+            </ObjectHeader>
+            <f:SimpleForm layout="ColumnLayout" columnsL="2" columnsM="2" columnsXL="2">
+                <Label text="Document Category" />
+                <Text text="{PurchasingDocumentCategory}" />
+                <Label text="Document Type" />
+                <Text text="{PurchasingDocumentType}" />
+                <Label text="Purchasing Organization" />
+                <Text text="{PurchasingOrganization}" />
+                <Label text="Purchasing Group" />
+                <Text text="{PurchasingGroup}" />
+                <Label text="Cash Discount Days 1" />
+                <Text text="{CashDiscount1Days}" />
+                <Label text="Cash Discount Days 2" />
+                <Text text="{CashDiscount2Days}" />
+                <Label text="Cash Discount Percent 1" />
+                <Text text="{CashDiscount1Percent}" />
+                <Label text="Cash Discount Percent 2" />
+                <Text text="{CashDiscount2Percent}" />
+                <Label text="Net Payment Days" />
+                <Text text="{NetPaymentDays}" />
+            </f:SimpleForm>
+		</content>
+	</Page>
+</mvc:View>

@@ -1,0 +1,114 @@
+<mvc:View xmlns:core="sap.ui.core"
+    controllerName="soyz.dev.poc.pocproject.controller.RequestList"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:table="sap.ui.table"
+>
+    <App id="appLogin">
+        <pages>
+            <Page showNavButton="true" navButtonPress="onNavBtnPress" navButtonTooltip="Back" >
+                <headerContent>
+                    <Button icon="sap-icon://log" text="Logout" tooltip="Logout" press='onLogout' type="Emphasized" />
+                </headerContent>
+                <content>
+                    <smartFilterBar:SmartFilterBar id="smartFilterBar" persistencyKey="UniqueAndStablePersistencyKey"
+                        considerSelectionVariants="true" entitySet="A_RequestForQuotation" showClearButton="true">
+                        <smartFilterBar:controlConfiguration>
+							<smartFilterBar:ControlConfiguration index="0" hasTypeAhead="true" key="RequestForQuotation" label="Request For Quotation" visibleInAdvancedArea="true"/>
+							<smartFilterBar:ControlConfiguration index="1" key="DocumentCurrency" label="Currency Code" visibleInAdvancedArea="true"/>
+							<smartFilterBar:ControlConfiguration index="2" key="CompanyCode" label="Company Code" visibleInAdvancedArea="true"/>
+							<smartFilterBar:ControlConfiguration index="3" key="RFQPublishingDate" label="Publishing Date" controlType="date" visibleInAdvancedArea="true"/>
+						</smartFilterBar:controlConfiguration>
+                        <smartFilterBar:layoutData>
+                            <FlexItemData shrinkFactor="0"/>
+                        </smartFilterBar:layoutData>
+                    </smartFilterBar:SmartFilterBar>
+
+
+                    <smartTable:SmartTable id="smartTable" entitySet="A_RequestForQuotation" smartFilterId="smartFilterBar" tableType="ResponsiveTable"
+						useExportToExcel="false" useVariantManagement="false" persistencyKey="SmartFilter_Explored" useTablePersonalisation="false" header="Quotation Requests"
+						showRowCount="true" initialise="onSmartTableInitialize" requestAtLeastFields="RequestForQuotation" beforeRebindTable="onBeforeRebindingTable">
+						<smartTable:customToolbar>
+							<OverflowToolbar design="Transparent">
+								<ToolbarSpacer/>
+								<Button text='Accept' type="Accept" press="AcceptPress"></Button>
+                                <Button text='Reject' type="Reject" press="RejectPress"></Button>
+							</OverflowToolbar>
+						</smartTable:customToolbar>
+						<Table id="RFQTable" noDataText="No Requests Found" mode="MultiSelect" itemPress="onRequestPress" >
+                            <!-- <headerToolbar>
+                                <Toolbar >
+                                    <ToolbarSpacer ></ToolbarSpacer>
+                                    <Button text='Accept' type="Accept" press="AcceptPress"></Button>
+                                    <Button text='Reject' type="Reject" press="RejectPress"></Button>
+                                </Toolbar>
+                            </headerToolbar> -->
+                            <columns>
+                                <Column>
+                                    <Label text="Request For Quotation" tooltip="Request For Quotation"/>
+                                </Column>
+                                <Column>
+                                    <Label text="Company Code"  tooltip="Company Code"/>
+                                </Column>
+                                <Column >
+                                    <Label text="Target Amount" tooltip="Target Amount"/>
+                                </Column>
+                                <Column >
+                                    <Label text="Currency" tooltip="Currency"/>
+                                </Column>
+                                <Column >
+                                    <Label text="Discount 1 Days" tooltip="Discount 1 Days"/>
+                                </Column>
+                                <Column >
+                                    <Label text="Discount 2 Days" tooltip="Discount 2 Days"/>
+                                </Column>
+                                <Column >
+                                    <Label text="Cash Discount 1" tooltip="Cash Discount 1"/>
+                                </Column>
+                                <Column >
+                                    <Label text="Cash Discount 2" tooltip="Cash Discount 2"/>
+                                </Column>
+                                <Column width="6%" >
+                                    <Label text="Status" tooltip="Status"/>
+                                </Column>
+                                <Column >
+                                    <Label text="Publishing Date" tooltip="Publishing Date"/>
+                                </Column>
+                                <Column >
+                                    <Label text="Submission Date" tooltip="Submission Date"/>
+                                </Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem id="idColumnListItems" type="Navigation">
+                                    <cells>
+                                        <Text text="{RequestForQuotation}" />
+                                        <Text text="{CompanyCode}" />
+                                        <Text text="{TargetAmount}" />
+                                        <Text text="{DocumentCurrency}" />
+                                        <Text text="{CashDiscount1Days}" />
+                                        <Text text="{CashDiscount2Days}" />
+                                        <Text text="{CashDiscount1Percent}" />
+                                        <Text text="{CashDiscount2Percent}" />
+                                        <Text text="{RFQLifecycleStatus}" />
+                                        <Text text="{path: 'RFQPublishingDate', formatter: '.formatter.getFormattedDate'}" />
+                                        <Text text="{path: 'QuotationLatestSubmissionDate', formatter: '.formatter.getFormattedDate'}" />
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+						<smartTable:layoutData>
+							<FlexItemData growFactor="1" baseSize="0%"/>
+						</smartTable:layoutData>
+					</smartTable:SmartTable>
+
+
+                    
+                </content>
+            </Page>
+        </pages>
+    </App>
+</mvc:View>

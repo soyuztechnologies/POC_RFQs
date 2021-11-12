@@ -1,0 +1,26 @@
+<mvc:View xmlns:form="sap.ui.layout.form" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" controllerName="soyz.dev.poc.pocproject.controller.ItemDetail" >
+    <Page title="Item Details" >
+        <headerContent>
+            <Button icon="sap-icon://log" text="Logout" tooltip="Logout" press='onLogout' type="Emphasized" />
+        </headerContent>
+        <content>
+            <List
+                items="{to_RequestForQuotationItem}"
+                itemPress="onListItemSelected">
+                <ObjectListItem
+                    title="{PurchasingDocumentItemText}"
+                    type="Active"
+                    press="onListItemPress"
+                    number="{ScheduleLineOrderQuantity}"
+                    numberUnit="{OrderQuantityUnit}">
+                    <firstStatus>
+                        <ObjectStatus title="Material" text="{Material}" />
+                    </firstStatus>
+                    <ObjectAttribute title="Plant" text="{Plant}" />
+                    <ObjectAttribute title="Catagory" text="{PurchasingDocumentCategory}" />
+                    <ObjectAttribute title="Schedule Delivery Date" text="{path: 'ScheduleLineDeliveryDate', formatter: '.formatter.getFormattedDate'}" />
+                </ObjectListItem>
+            </List>
+        </content>
+    </Page>
+</mvc:View>
